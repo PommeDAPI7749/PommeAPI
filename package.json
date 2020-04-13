@@ -1,0 +1,16 @@
+{
+  "name": "pommeapi",
+  "version": "0.1.0",
+  "description": "Bot multi-fonction",
+  "main": "main.js",
+  "dependencies": {
+    "discord.js": "^12.1.1",
+    "git": "^0.1.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "PommeD'Api",
+  "license": "ISC"
+}
