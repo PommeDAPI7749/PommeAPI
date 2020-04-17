@@ -150,7 +150,7 @@ client.on('message', message => {
      message.channel.send(`⌚ Pinging....`).then(message=>{
         const pingembed = new Discord.MessageEmbed()
           .setTitle(client.user.username)
-          .setDescription(`\n📡 | Latence Bot : ${Math.round(client.ws.ping)}ms`)
+          .setDescription(`\n📡 | Latence du Bot : ${Math.round(client.ws.ping)}ms`)
           .setColor('RANDOM');
         message.edit(pingembed);
         message.edit("\u200B")
