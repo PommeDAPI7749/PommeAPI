@@ -28,7 +28,7 @@ client.on('message', message => {
   const cmd = args.shift().toLowerCase();
   if (cmd === `${prefix}annonce`) {
     message.delete()
-    if(!message.member.hasPermission("BAN_MEMBERS")) return;
+    if(!message.member.hasPermission("ADMINISTRATOR")) return;
     if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("❌ | Il te faut la permission ADMINISTRATOR pour utiliser cette commande !")
     const mCh = message.mentions.channels.first()
     if(!mCh) return message.channel.send("⚠️ | Mentionnes le salon")
@@ -301,6 +301,24 @@ client.on('message', message => {
     })
     message.channel.send("✅ | " + message.author.username + "ta suggestion a bien été soumise au vote du serveur")
   
+  }
+
+  if (cmd === `${prefix}règlement`) {
+    if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("❌ | Il te faut la permission ADMINISTRATOR pour utiliser cette commande !");
+    const messageToBot = args.slice(0).join(" ")
+    if(!messageToBot) return message.channel.send("⚠️ | Merci d'ecrire la suggestion que tu veux publier.");
+    
+    const Règleembed = new Discord.MessageEmbed()
+    .setTitle(`📃 | Règlement du serveur ${message.guild.name}`)
+    .setThumbnail(message.guild.iconURL())
+    .setColor(colors.bleu_royal)
+    .setDescription("Valable pour tous quelque soit votre rôle")
+    .addField(`**${messageToBot}**`, '\u200b')
+    .setFooter(`PommeAPI`, client.user.avatarURL())
+    .setTimestamp();
+  
+    message.channel.send(Règleembed)
+    message.delete();
   }
 
   if (cmd === `${prefix}ticket`) {
