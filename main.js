@@ -1,7 +1,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-const colors = require("./colors.json")
+const colors = require("./colors.json");
+const moment = require("moment")
 
 client.login(config.token);
 const prefix = config.prefix
@@ -144,19 +145,16 @@ client.on('message', message => {
     message.delete();
   }
 
-  if (cmd === `${prefix}newhelp`) {
-    const newhelpembed = new Discord.MessageEmbed()
-      .setColor(colors.green_light)
-      .setTitle("Où veux tu recevoir le message d'aide?")
-      .setThumbnail(message.author.avatarURL())
-      .setDescription("**📩 : en Messages Privés** \n **📥 : ici** \n **❌ : Annuler**")
-      .setFooter(`PommeAPI `, client.user.displayAvatarURL())
-      .setTimestamp();
-    message.channel.send(newhelpembed).then(async message => {
-      await message.react("📩")
-      await message.react("📥")
-      await message.react("❌")
-  })
+  if (cmd === `${prefix}ping`) { 
+    message.delete()
+     message.channel.send(`⌚ Pinging....`).then(message=>{
+        const pingembed = new Discord.MessageEmbed()
+          .setTitle(client.user.username)
+          .setDescription(`\n📡 | Latence Bot : ${Math.round(client.ws.ping)}ms`)
+          .setColor('RANDOM');
+        message.edit(pingembed);
+        message.edit("\u200B")
+    });
   }
 
   if (cmd === `${prefix}infos-bot`) {
@@ -206,11 +204,11 @@ client.on('message', message => {
     const avatar = member.user.displayAvatarURL();
     const iuembed = new Discord.MessageEmbed()
       .setColor(colors.bleu_poudre)
-      .setTitle(member.username)
+      .setTitle(member.user.username)
       .setThumbnail(avatar)
-      .addField("Son tag :", member.tag)
-      .addField("Son ID :", member.id)
-      .addField("Son compte a été créé le :", member.user.createdAt)
+      .addField("Son tag :", member.user.tag)
+      .addField("Son ID :", member.user.id)
+      .addField("Son compte a été créé le :", member.user.user.createdAt)
       .setFooter(`PommeAPI `, client.user.displayAvatarURL())
       .setTimestamp();
     message.channel.send(iuembed);
@@ -301,24 +299,6 @@ client.on('message', message => {
     })
     message.channel.send("✅ | " + message.author.username + "ta suggestion a bien été soumise au vote du serveur")
   
-  }
-
-  if (cmd === `${prefix}règlement`) {
-    if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("❌ | Il te faut la permission ADMINISTRATOR pour utiliser cette commande !");
-    const messageToBot = args.slice(0).join(" ")
-    if(!messageToBot) return message.channel.send("⚠️ | Merci d'ecrire la suggestion que tu veux publier.");
-    
-    const Règleembed = new Discord.MessageEmbed()
-    .setTitle(`📃 | Règlement du serveur ${message.guild.name}`)
-    .setThumbnail(message.guild.iconURL())
-    .setColor(colors.bleu_royal)
-    .setDescription("Valable pour tous quelque soit votre rôle")
-    .addField(`**${messageToBot}**`, '\u200b')
-    .setFooter(`PommeAPI`, client.user.avatarURL())
-    .setTimestamp();
-  
-    message.channel.send(Règleembed)
-    message.delete();
   }
 
   if (cmd === `${prefix}ticket`) {

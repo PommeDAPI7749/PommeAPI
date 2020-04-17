@@ -6,7 +6,8 @@
   "dependencies": {
     "discord.js": "^12.1.1",
     "fs": "0.0.1-security",
-    "git": "^0.1.5"
+    "git": "^0.1.5",
+    "moment": "^2.24.0"
   },
   "devDependencies": {},
   "scripts": {
