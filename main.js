@@ -119,6 +119,7 @@ client.on('message', message => {
     .addField(`📖\ Comandes informatives`,` Tes infos : \`infos-utilisateur\`
       Infos du serveur : \`infos-serveur\`
       Infos du bot : \`infos-bot\`
+      Pour connaitre la Latence du bot : \`ping\`
       \u200b`)
     .addField(`📋\ Commandes pour tous :`, `Pour emmetre une suggestion : \`sugg #salon < ta suggestion>\`
       Pour voir ton Avatar : \`avatar\`
