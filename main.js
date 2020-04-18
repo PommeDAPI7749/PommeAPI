@@ -146,7 +146,7 @@ client.on('message', message => {
     message.delete();
   }
 
-if (cmd === 'Salut', 'salut', 'Hola', 'hola', 'Guten', 'guten', 'Bonjour','bonjour', 'yo', 'Yo')  {
+if (message === 'Salut', 'salut', 'Hola', 'hola', 'Guten', 'guten', 'Bonjour','bonjour', 'yo', 'Yo')  {
     reactWith ('👋');
   }
   if (cmd === `${prefix}ping`) { 
