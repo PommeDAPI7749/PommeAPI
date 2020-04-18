@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const ms = require("ms");
 const client = new Discord.Client();
 const config = require("./config.json");
 const colors = require("./colors.json");
@@ -300,7 +301,7 @@ client.on('message', message => {
     }, time);
     })
   }
-  
+
   if (cmd === `${prefix}say`) {
     if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("❌ | Il te faut la permission KICK_MEMBERS pour utiliser cette commande !")
     message.channel.send(args.join(" "));
