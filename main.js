@@ -147,7 +147,7 @@ client.on('message', message => {
   }
 
 if (message === 'Salut', 'salut', 'Hola', 'hola', 'Guten', 'guten', 'Bonjour','bonjour', 'yo', 'Yo')  {
-    reactWith ('👋');
+    message.channel.send(`👋 | Bonjour à toi ${message.author} !!!! Et aux autres aussi.`);
   }
   if (cmd === `${prefix}ping`) { 
     message.delete()
