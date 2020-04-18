@@ -295,9 +295,9 @@ client.on('message', message => {
       return winner(msg)
     }
     setTimeout(() => {
-    if(reactions(msg) < 3)return message.channel.send('⚠️ | Le giveaway ne peut avoir lieu car moins de 2 personnes ont participé')
+    if(reactions(msg) < 2)return message.channel.send('⚠️ | Le giveaway ne peut avoir lieu car moins de 2 personnes ont participé')
       const win = winner(msg)
-        return message.channel.send(`🎉 | Le(la) gagnant(e) du giveaway est <@${win}> bravo à toi tu remportes **${prize}** !`)
+        return message.channel.send(`🎉 | Le(la) gagnant(e) du giveaway est <@${win}>, bravo à toi tu remportes **${prize}** !`)
     }, time);
     })
   }
