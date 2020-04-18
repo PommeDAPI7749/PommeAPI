@@ -257,6 +257,50 @@ client.on('message', message => {
     message.channel.send(answers[Math.floor(Math.random() * answers.length)])  
   }
 
+  if (cmd === `${prefix}giveaway`) {
+    message.delete()
+    if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("❌ | Tu n'as pas les permissions nécessaires pour lancer un giveaway !")
+    const timev = message.content.slice(prefix.length+9)
+    if(!timev) return message.channel.send('⚠️ | Tu dois spécifier la durée du giveaway en MS!')
+    const time = parseInt(timev,10)
+    if(time< 15000)   return message.channel.send('⚠️ | Le giveaway doit durer plus de 15 secondes (15000 MS)')
+  
+    const prize = message.content.split(`${time}`).join("").split(`${prefix}giveaway `).join("")
+    if(!prize) return message.channel.send("⚠️ | Il faut que tu précises le lot à gagner durant le giveaway")
+    const embed = new Discord.MessageEmbed()
+      .setTitle('🎉 | Giveaway !')
+      .setDescription(`**Tu as tes chances de gagner :** __${prize}__`)
+      .setColor('RANDOM')
+      .addField("\u200b", `Ce giveway dure ${ms(time)} secondes !`)
+      .setFooter(`PommeAPI `, client.user.displayAvatarURL())
+      .setTimestamp();
+    let msg = message.channel.send(embed).then(async message => {
+      await message.react('🎉');
+  
+    
+    function winner(msg){
+        
+      const winner = message.reactions.cache.get('🎉').users.cache.random().id
+      return winner
+    };
+    function rawWinner(msg){
+      const winner =  message.reactions.cache.get('🎉').users.cache.random()
+    }
+  
+    function reactions(msg){
+      return message.reactions.cache.size
+    }
+    function reroll(msg){
+      return winner(msg)
+    }
+    setTimeout(() => {
+    if(reactions(msg) < 6)return message.channel.send('⚠️ | Le giveaway ne peut avoir lieu car moins de 5 personnes ont participé')
+      const win = winner(msg)
+        return message.channel.send(`🎉 | Le(la) gagnant(e) du giveaway est <@${win}> bravo à toi tu remportes **${prize}** !`)
+    }, time);
+    })
+  }
+  
   if (cmd === `${prefix}say`) {
     if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("❌ | Il te faut la permission KICK_MEMBERS pour utiliser cette commande !")
     message.channel.send(args.join(" "));
@@ -318,50 +362,6 @@ client.on('message', message => {
         .setTimestamp();
       channells.send(embed);
       message.channel.send(`✅ | ${message.author}, ton ticket à bien été envoyer dans le serveur support.`);
-  }
-
-  if (cmd === `${prefix}giveaway`) {
-    message.delete()
-    if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("❌ | Tu n'as pas les permissions nécessaires pour lancer un giveaway !")
-    const timev = message.content.slice(prefix.length+9)
-    if(!timev) return message.channel.send('⚠️ | Tu dois spécifier la durée du giveaway en MS!')
-    const time = parseInt(timev,10)
-    if(time< 15000)   return message.channel.send('⚠️ | Le giveaway doit durer plus de 15 secondes (15000 MS)')
-  
-    const prize = message.content.split(`${time}`).join("").split(`${prefix}giveaway `).join("")
-    if(!prize) return message.channel.send("⚠️ | Il faut que tu précises le lot à gagner durant le giveaway")
-    const embed = new Discord.MessageEmbed()
-      .setTitle('🎉 | Giveaway !')
-      .setDescription(`**Tu as tes chances de gagner :** __${prize}__`)
-      .setColor('RANDOM')
-      .addField("\u200b", `Ce giveway dure ${ms(time)} secondes !`)
-      .setFooter(`PommeAPI `, client.user.displayAvatarURL())
-      .setTimestamp();
-    let msg = message.channel.send(embed).then(async message => {
-      await message.react('🎉');
-  
-    
-    function winner(msg){
-        
-      const winner = message.reactions.cache.get('🎉').users.cache.random().id
-      return winner
-    };
-    function rawWinner(msg){
-      const winner =  message.reactions.cache.get('🎉').users.cache.random()
-    }
-  
-    function reactions(msg){
-      return message.reactions.cache.size
-    }
-    function reroll(msg){
-      return winner(msg)
-    }
-    setTimeout(() => {
-    if(reactions(msg) < 6)return message.channel.send('⚠️ | Le giveaway ne peut avoir lieu car moins de 5 personnes ont participé')
-      const win = winner(msg)
-        return message.channel.send(`🎉 | Le(la) gagnant(e) du giveaway est <@${win}> bravo à toi tu remportes **${prize}** !`)
-    }, time);
-    })
   }
 
   if (message.content === 'salut')  {
