@@ -136,6 +136,7 @@ client.on('message', message => {
       Pour effacer des messages : \`clear <nombre de messages>\`
       Pour faire une annonce : \`annonce #salon <annonce>\`
       Pour que le bot parle en ton nom : \`say <ce que tu veux qu'il dise>\`
+      Pour lancer un giveaway : \`giveaway [temps en ms] [lot]\`
       Pour demander a tous d'arreter de parler : \`silence\`
       D'autres commandes staff arrivent (mute, unmute, tempmute, unban, tempban et bien d'autres)`)
     .addField('\u200b', `De nombreuses commandes sont en développement, patience 
