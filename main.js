@@ -116,21 +116,21 @@ client.on('message', message => {
     .setColor(colors.green_light)
     .setTitle(`📌| Aide PommeAPI`)
     .setDescription(`Le préfix du bot est \`p?\` veuillez le mettre devant toutes les commandes sinon le bot ignorera votre message.`)
-    .addField(`📖\ Comandes informatives`,` Tes infos : \`infos-utilisateur\`
+    .addField(`📖 | Comandes informatives`,` Tes infos : \`infos-utilisateur\`
       Infos du serveur : \`infos-serveur\`
       Infos du bot : \`infos-bot\`
       Pour connaitre la Latence du bot : \`ping\`
       \u200b`)
-    .addField(`📋\ Commandes pour tous :`, `Pour emmetre une suggestion : \`sugg #salon < ta suggestion>\`
+    .addField(`📋 | Commandes pour tous :`, `Pour emmetre une suggestion : \`sugg #salon < ta suggestion>\`
       Pour voir ton Avatar : \`avatar\`
       Pour poser des questions au bot (les réponses sont aléatoires): \`question <question>\`
       Si tu as des problèmes : \`ticket j'ai un problème\`
       Pour contacter le staff du bot : \`ticket je veux parler au staff de PommeAPI\`
       Pour contacter le développeur du bot : \`ticket je veux parler au dev de PommeAPI\`
       \u200b`)
-    .addField(`🎧\ Commandes musique :`, `Sois patient, ça arrive ...
+    .addField(`🎧 | Commandes musique :`, `Sois patient, ça arrive ...
       \u200b`)
-    .addField(`👮🏼\ Commandes Staff :`, `Pour bannir un membre : \`ban\`
+    .addField(`👮🏼 | Commandes Staff :`, `Pour bannir un membre : \`ban\`
       Pour exclure un membre : \`kick\`
       Pour effacer des messages : \`clear <nombre de messages>\`
       Pour faire une annonce : \`annonce #salon <annonce>\`
@@ -318,6 +318,46 @@ client.on('message', message => {
         .setTimestamp();
       channells.send(embed);
       message.channel.send(`✅ | ${message.author}, ton ticket à bien été envoyer dans le serveur support.`);
+  }
+
+  if (message.content === 'salut')  {
+    message.react('👋');
+  } 
+
+  if (message.content === 'Salut')  {
+    message.react('👋');
+  } 
+
+  if (message.content === 'bonjour')  {
+    message.react('👋');
+  } 
+
+  if (message.content === 'Bonjour')  {
+    message.react('👋');
+  }
+
+  if (message.content === 'Guten')  {
+    message.react('👋');
+  } 
+
+  if (message.content === 'guten')  {
+    message.react('👋');
+  } 
+
+  if (message.content === 'Hola')  {
+    message.react('👋');
+  } 
+
+  if (message.content === 'hola')  {
+    message.react('👋');
+  } 
+
+  if (message.content === 'yo')  {
+    message.react('👋');
+  } 
+
+  if (message.content === 'Yo')  {
+    message.react('👋');
   }
 });
 
