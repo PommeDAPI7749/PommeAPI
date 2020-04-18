@@ -122,9 +122,9 @@ client.on('message', message => {
       Infos du bot : \`infos-bot\`
       Pour connaitre la Latence du bot : \`ping\`
       \u200b`)
-    .addField(`📋 | Commandes pour tous :`, `Pour emmetre une suggestion : \`sugg #salon < ta suggestion>\`
+    .addField(`📋 | Commandes pour tous :`, `Pour emmetre une suggestion : \`sugg #salon [ta suggestion]\`
       Pour voir ton Avatar : \`avatar\`
-      Pour poser des questions au bot (les réponses sont aléatoires): \`question <question>\`
+      Pour poser des questions au bot (les réponses sont aléatoires): \`question [question]\`
       Si tu as des problèmes : \`ticket j'ai un problème\`
       Pour contacter le staff du bot : \`ticket je veux parler au staff de PommeAPI\`
       Pour contacter le développeur du bot : \`ticket je veux parler au dev de PommeAPI\`
@@ -133,9 +133,9 @@ client.on('message', message => {
       \u200b`)
     .addField(`👮🏼 | Commandes Staff :`, `Pour bannir un membre : \`ban\`
       Pour exclure un membre : \`kick\`
-      Pour effacer des messages : \`clear <nombre de messages>\`
-      Pour faire une annonce : \`annonce #salon <annonce>\`
-      Pour que le bot parle en ton nom : \`say <ce que tu veux qu'il dise>\`
+      Pour effacer des messages : \`clear [nombre de messages]\`
+      Pour faire une annonce : \`annonce #salon [annonce]\`
+      Pour que le bot parle en ton nom : \`say [ce que tu veux qu'il dise]\`
       Pour lancer un giveaway : \`giveaway [temps en ms] [lot]\`
       Pour demander a tous d'arreter de parler : \`silence\`
       D'autres commandes staff arrivent (mute, unmute, tempmute, unban, tempban et bien d'autres)`)
