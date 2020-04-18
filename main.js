@@ -189,35 +189,6 @@ client.on('message', message => {
     message.delete({timeout: 3000});  
   }
 
-  if (cmd === `${prefix}infos-utilisateur`) {
-    if(!args[0]) {
-      const iuembed = new Discord.MessageEmbed()
-      .setColor(colors.bleu_poudre)
-      .setTitle(message.author.username)
-      .setThumbnail(message.author.avatarURL())
-      .addField("Votre tag :", message.author.tag)
-      .addField("Votre ID :", message.author.id)
-      .addField("Votre compte a été créé le :", message.author.createdAt)
-      .setFooter(`PommeAPI `, client.user.displayAvatarURL())
-      .setTimestamp();
-    message.channel.send(iuembed);
-    } else {
-    const member = message.mentions.members.first();
-    const avatar = member.user.displayAvatarURL();
-    const iuembed = new Discord.MessageEmbed()
-      .setColor(colors.bleu_poudre)
-      .setTitle(member.user.username)
-      .setThumbnail(avatar)
-      .addField("Son tag :", member.user.tag)
-      .addField("Son ID :", member.user.id)
-      .addField("Son compte a été créé le :", member.user.user.createdAt)
-      .setFooter(`PommeAPI `, client.user.displayAvatarURL())
-      .setTimestamp();
-    message.channel.send(iuembed);
-    }
-    message.delete();  
-  }
-
   if (cmd === `${prefix}kick`) {
     if(!message.member.hasPermission("BAN_MEMBERS")) message.channel.send("❌ | Il te faut la permission KICK_MEMBERS pour utiliser cette commande !");
     if(!args[0]) message.reply("⚠️ | Il faut que tu mentionne la personne que tu veux kick !")
@@ -319,6 +290,41 @@ client.on('message', message => {
     .setTimestamp();
   message.channel.send(Silenceembed);
   message.delete();
+  }
+
+  if (cmd === `${prefix}infos-utilisateur`) {
+    if(!args[0]) {
+      const iuembed = new Discord.MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle(message.author.username)
+      .setThumbnail(message.author.avatarURL())
+      .addField("**Nom d'utilisateur :**", `${message.author.username}`, true)
+      .addField("**Tag :**", `${message.author.tag}`, true)
+      .addField("**ID :**", `${message.author.id}`, true)
+      .addField("**Bot :**", `${message.author.bot}`, true)
+      .addField("**Statut :**", `${message.author.presence.status}`, true)
+      .addField("**A rejoint Discord le :**", `${message.author.createdAt}`, true)
+      .setFooter(`PommeAPI `, client.user.displayAvatarURL())
+      .setTimestamp();
+    message.channel.send(iuembed);
+    } else {
+    const member = message.mentions.members.first();
+    const avatar = member.user.displayAvatarURL();
+    const iuembed = new Discord.MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle(member.user.username)
+      .setThumbnail(member.user.avatarURL())
+      .addField("**Nom d'utilisateur :**", `${member.user.username}`, true)
+      .addField("**Tag :**", `${member.user.discriminator}`, true)
+      .addField("**ID :**", `${member.user.id}`, true)
+      .addField("**Bot :**", `${member.user.bot}`, true)
+      .addField("**Statut :**", `${member.user.presence.status}`, true)
+      .addField("**A rejoint Discord le :**", `${member.user.createdAt}`, true)
+      .setFooter(`PommeAPI | Fiche demandé par ${message.author.username}`, client.user.displayAvatarURL())
+      .setTimestamp();
+    message.channel.send(iuembed);
+    }
+    message.delete();
   }
 
   if (cmd === `${prefix}sugg`) {
