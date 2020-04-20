@@ -201,7 +201,7 @@ client.on('message', message => {
   }
 
   if (cmd === `${prefix}perdue`) {
-    const ch = client.channel.cache.find(ch => ch.name === 'logs-jdhfkfnehdkdhdekls')
+    const ch = client.channels.cache.find(ch => ch.name === 'logs-jdhfkfnehdkdhdekls')
     const Perdueembed = new Discord.MessageEmbed()
       .setColor(colors.blue_light)
       .setTitle("BRAVO !!!")
@@ -253,19 +253,19 @@ client.on('message', message => {
     
     function winner(msg){
         
-      const winner = message.reactions.cache.get('🎉').users.cache.random().id
+      const winner = message.reactions.cache.get('🎉').users.cache.random().id 
       return winner
     };
     function rawWinner(msg){
       const winner =  message.reactions.cache.get('🎉').users.cache.random()
-    }
+    };
   
     function reactions(msg){
       return message.reactions.cache.size
-    }
-    function reroll(msg){
+    };
+    function reroll(msg) {
       return winner(msg)
-    }
+    };
     setTimeout(() => {
       const win = winner(msg)
         return message.channel.send(`🎉 | Le(la) gagnant(e) du giveaway est <@${win}>, bravo à toi tu remportes **${prize}** !`)
@@ -300,7 +300,7 @@ client.on('message', message => {
       .setTitle(message.author.username)
       .setThumbnail(message.author.avatarURL())
       .addField("**Nom d'utilisateur :**", `${message.author.username}`, true)
-      .addField("**Tag :**", `${message.author.tag}`, true)
+      .addField("**Tag :**", `${message.author.discriminator}`, true)
       .addField("**ID :**", `${message.author.id}`, true)
       .addField("**Bot :**", `${message.author.bot}`, true)
       .addField("**Statut :**", `${message.author.presence.status}`, true)
@@ -410,6 +410,34 @@ client.on('message', message => {
   if (message.content === 'Yo')  {
     message.react('👋');
   }
+
+  if (message.channel.id == "698084775063322644") { console.log("ok")
+    message.react("✅")
+    message.react("🤷‍♂️")
+    message.react("❌")
+  message.author.send("Ta candidature est en cours de validation ! N'oublie pas que le rôle de modérateur demande de la maturité, ne spam pas les recruteur de peur qu'il ne te considèrent comme immature.");
+  const collector = message.createReactionCollector((reaction, GuildMember) => GuildMember.id === message.author.id);
+  collector.on('collect', async (reaction) => {
+      console.log("t")
+      if (reaction.emoji.name === "✅") {
+          let channel_check = client.channels.cache.get("698084775063322644");
+          message.author.send("Ta candidature a été accepter ! il ne te reste plus qu'a passer ton oral avec un staff", console.log("n")) 
+          let roleorale = message.guild.roles.cache.get('698426434661908550')
+          message.member.roles.add(roleorale)
+          message.delete(message)
+      }
+      if (reaction.emoji.name === "🤷‍♂️") {
+          let channel_check = client.channels.cache.get("698084775063322644");
+          message.author.send("Ta candidature est a refaire. Elle est peut etre mal faite essaie de respecter notre plan donné, de mettre le bon nombre de ligne pour l'histoire mp et ne pas oublié quelque chose (psn age prenom...)")
+      }
+      message.delete(message)
+      if (reaction.emoji.name === "❌") {
+          let channel_check = client.channels.cache.get("698084775063322644");
+          message.author.send("Ta candidature a été refusé ! nous somme desolé. C'est peut etre dut a votre age.")
+          message.delete(message)
+      }
+  })
+};
 });
 
 client.on("guildMemberAdd", member => {
@@ -431,88 +459,4 @@ client.on("guildMemberRemove", member => {
   if (!channel) return;
   member.send("nous esperons de tout coeur que tu acceptera bientot de revenir dans nos vies.")
   channel.send(`Au revoir ${member} et a bientôt.`);
-});
-
-client.on("messageReactionAdd", (messageReaction, message, user) => {
-
-  if(
-      ["📩", "📥", "❌"].includes(messageReaction.emoji.name)
-  ) {
-      switch(messageReaction.emoji.name) {
-
-          case"📩":
-          const mphelpembed = new Discord.MessageEmbed()
-            .setColor(colors.green_light)
-            .setTitle(`📌| Aide PommeAPI`)
-            .setDescription(`Le préfix du bot est \`p?\` veuillez le mettre devant toutes les commandes sinon le bot ignorera votre message.`)
-            .addField(`📖\ Comandes informatives`,` Tes infos : \`infos-utilisateur\`
-              Infos du serveur : \`infos-serveur\`
-              Infos du bot : \`infos-bot\`
-              \u200b`)
-            .addField(`📋\ Commandes pour tous :`, `Pour emmetre une suggestion : \`sugg #salon < ta suggestion>\`
-              Pour voir ton Avatar : \`avatar\`
-              Pour poser des questions au bot (les réponses sont aléatoires): \`question <question>\`
-              Si tu as des problèmes : \`ticket j'ai un problème\`
-              Pour contacter le staff du bot : \`ticket je veux parler au staff de PommeAPI\`
-              Pour contacter le développeur du bot : \`ticket je veux parler au dev de PommeAPI\`
-              \u200b`)
-            .addField(`🎧\ Commandes musique :`, `Sois patient, ça arrive ...
-              \u200b`)
-            .addField(`👮🏼\ Commandes Staff :`, `Pour bannir un membre : \`ban\`
-              Pour exclure un membre : \`kick\`
-              Pour effacer des messages : \`clear <nombre de messages>\`
-              Pour faire une annonce : \`annonce #salon <annonce>\`
-              Pour que le bot parle en ton nom : \`say <ce que tu veux qu'il dise>\`
-              Pour demander a tous d'arreter de parler : \`silence\`
-              D'autres commandes staff arrivent (mute, unmute, tempmute, unban, tempban et bien d'autres)`)
-            .addField('\u200b', `De nombreuses commandes sont en développement, patience 
-              En attendant tu est bienvenue sur le serveur support,
-              Ton ticket => https://discord.gg/zWvtWh8`)
-            .setFooter(`PommeAPI `, client.user.displayAvatarURL())
-            .setTimestamp();
-            user.send(mphelpembed);
-            message.delete()
-          break;
-
-          case"📥":
-          const salonhelpembed = new Discord.MessageEmbed()
-            .setColor(colors.green_light)
-            .setTitle(`📌| Aide PommeAPI`)
-            .setDescription(`Le préfix du bot est \`p?\` veuillez le mettre devant toutes les commandes sinon le bot ignorera votre message.`)
-            .addField(`📖\ Comandes informatives`,` Tes infos : \`infos-utilisateur\`
-              Infos du serveur : \`infos-serveur\`
-              Infos du bot : \`infos-bot\`
-              \u200b`)
-            .addField(`📋\ Commandes pour tous :`, `Pour emmetre une suggestion : \`sugg #salon < ta suggestion>\`
-              Pour voir ton Avatar : \`avatar\`
-              Pour poser des questions au bot (les réponses sont aléatoires): \`question <question>\`
-              Si tu as des problèmes : \`ticket j'ai un problème\`
-              Pour contacter le staff du bot : \`ticket je veux parler au staff de PommeAPI\`
-              Pour contacter le développeur du bot : \`ticket je veux parler au dev de PommeAPI\`
-              \u200b`)
-            .addField(`🎧\ Commandes musique :`, `Sois patient, ça arrive ...
-              \u200b`)
-            .addField(`👮🏼\ Commandes Staff :`, `Pour bannir un membre : \`ban\`
-              Pour exclure un membre : \`kick\`
-              Pour effacer des messages : \`clear <nombre de messages>\`
-              Pour faire une annonce : \`annonce #salon <annonce>\`
-              Pour que le bot parle en ton nom : \`say <ce que tu veux qu'il dise>\`
-              Pour demander a tous d'arreter de parler : \`silence\`
-              D'autres commandes staff arrivent (mute, unmute, tempmute, unban, tempban et bien d'autres)`)
-            .addField('\u200b', `De nombreuses commandes sont en développement, patience 
-              En attendant tu est bienvenue sur le serveur support,
-              Ton ticket => https://discord.gg/zWvtWh8`)
-            .setFooter(`PommeAPI `, client.user.displayAvatarURL())
-            .setTimestamp();
-          message.channel.send(salonhelpembed);
-          message.delete()
-          break;
-
-          case"❌":
-          message.delete()
-          message.channel.send("✅ | Action annulée avec succès !")
-          break;
-      }
-  }
-
 });
